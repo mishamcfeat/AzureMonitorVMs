@@ -4,7 +4,7 @@ from matplotlib.dates import MinuteLocator, DateFormatter
 from matplotlib.ticker import AutoMinorLocator
 
 # Read the data from the CSV file
-df = pd.read_csv('../data/metrics_data.csv')
+df = pd.read_csv('N:\CODE_MAIN\AZURE_MONITOR\data\metrics_data.csv')
 
 # Convert the Timestamp column to datetime format
 df['Timestamp'] = pd.to_datetime(df['Timestamp'])
@@ -15,11 +15,13 @@ df.set_index('Timestamp', inplace=True)
 # Define the metrics of interest
 metrics_of_interest = ['Percentage CPU', 'Available Memory Bytes']
 
+# Create a single figure with two side-by-side subplots
+fig, axs = plt.subplots(nrows=1, ncols=2, figsize=(15, 6))
+
 # For each metric of interest
-for metric in metrics_of_interest:
+for i, metric in enumerate(metrics_of_interest):
     if metric in df['Metric'].unique():
-        # Create a figure and a set of subplots
-        fig, ax = plt.subplots()
+        ax = axs[i]  # Use each subplot for plotting
 
         # Add labels and title
         ax.set_xlabel('Time')
@@ -41,9 +43,11 @@ for metric in metrics_of_interest:
 
         # Plot the data for the current metric
         df[df['Metric'] == metric]['Value'].plot(ax=ax, label=metric)
-        plt.legend()
+        ax.legend()
 
         # Rotate x-axis labels for better visibility
-        plt.xticks(rotation=45)
+        ax.tick_params(axis='x', rotation=45)
 
-        plt.show()
+# Display the plots
+plt.tight_layout()  # Adjust layout for better appearance
+plt.show()

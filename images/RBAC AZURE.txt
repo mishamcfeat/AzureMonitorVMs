@@ -1,0 +1,9 @@
+
+misha [ ~ ]$ az ad sp create-for-rbac --name myServicePrincipal
+The output includes credentials that you must protect. Be sure that you do not include these credentials in your code or check the credentials into your source control. For more information, see https://aka.ms/azadsp-cli
+{
+  "appId": "f4cbbdfb-9fcf-4738-99e7-980aea7a44fe",
+  "displayName": "myServicePrincipal",
+  "password": "AW68Q~txRfr4.vUqGnyq~BmeCQHq6jbe~x4XeaCc",
+  "tenant": "fea5736c-34d0-497e-8977-f24e6da56d48"
+}
